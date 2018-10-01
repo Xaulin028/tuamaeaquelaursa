@@ -161,8 +161,7 @@ export default {
   }
 
   .table-row:hover {
-    border: 3px solid black;
-    background-color: $cta-hover;
+    background-color: #eee;
   }
 
   .no-mails {

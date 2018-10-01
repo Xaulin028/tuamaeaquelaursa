@@ -12,27 +12,27 @@
 // Testing for empty inbox
 //
 
-// Lets goto inbox kitten
-I.goTo("https://inboxkitten.com");
-I.see("Open-Source Disposable Email");
+// Lets goto tuamaeaquelaursa
+I.goTo("https://tuamaeaquelaursa.com");
+I.see("Crie um email descartável @tuamaeaquelaursa.com");
 
 // Go to a random inbox inbox
 I.fill("email", SAMPLE.id(22));
-I.click("Get Mail Nyow!");
+I.click("Criar email");
 
 // Check that its empty
-I.see("There for no messages for this kitten :(");
+I.see("Tua mãe, aquela ursa, ainda não recebeu nenhum email =/");
 
 //
 // Testing for regular email
 // (sent using a jenkins perodic build)
 //
 
-// Lets go back inbox kitten mailbox
-I.goTo("https://inboxkitten.com");
-I.see("Open-Source Disposable Email");
+// Lets go back tuamaeaquelaursa mailbox
+I.goTo("https://tuamaeaquelaursa.com");
+I.see("Crie um email descartável @tuamaeaquelaursa.com");
 I.fill("email", "ik-reciever-f7s1g28");
-I.click("Get Mail Nyow!");
+I.click("Criar email");
 
 // See an email we expect, and click it
 I.click("Testing inboxkitten subject");
