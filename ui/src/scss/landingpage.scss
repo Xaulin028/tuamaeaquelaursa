@@ -7,404 +7,404 @@
 
 // Min-width for body (for some sanity)
 body {
-	min-width: 280px;
-	background: white;
+  min-width: 280px;
+  background: white;
 }
 
 //
 // Landing page header and logo
 //
 .header {
-	padding-top: 3rem;
-	padding-bottom: 2rem;
-	width: 100vw;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+  width: 100vw;
 
-	.logo {
-		width:40vw;
-		max-width: 800px;
-		margin-bottom:1rem;
-	}
+  .logo {
+    width:40vw;
+    max-width: 800px;
+    margin-bottom:1rem;
+  }
 
-	h1 {
-		color:$dark-text;
-		padding-left:2rem;
-		padding-right:2rem;
-	}
-	h3 {
-		color:$bright-text;
-		padding-left:2rem;
-		padding-right:2rem;
-		margin-bottom: 0;
-	}
+  h1 {
+    color:$dark-text;
+    padding-left:2rem;
+    padding-right:2rem;
+  }
+  h3 {
+    color:$bright-text;
+    padding-left:2rem;
+    padding-right:2rem;
+    margin-bottom: 0;
+  }
 
-	h1,h2 {
-		margin:0;
-	}
+  h1,h2 {
+    margin:0;
+  }
 
-	@media only screen and (max-width:760px) {
-		.logo {
-			width: 80vw;
-		}
+  @media only screen and (max-width:760px) {
+    .logo {
+      width: 80vw;
+    }
 
-		// Line display hack to force a new block
-		h1 a {
-			display:block;
-		}
-	}
+    // Line display hack to force a new block
+    h1 a {
+      display:block;
+    }
+  }
 }
 
 //
 // Email selection box
 //
 .email-selection {
-	width: 100vw;
+  width: 100vw;
 
-	padding-top: 1rem;
-	padding-bottom: 3rem;
+  padding-top: 1rem;
+  padding-bottom: 3rem;
 
-	// Adust the input box elements borders
-	$input-box-el-border-radius: 0.4rem;
+  // Adust the input box elements borders
+  $input-box-el-border-radius: 0.4rem;
 
-	// The main input box
-	.input-box {
+  // The main input box
+  .input-box {
 
-		// Remove space between inline-blocks
-		font-size:0;
+    // Remove space between inline-blocks
+    font-size:0;
 
-		// Input-box radius : note you will need
-		// to update input left top/bottom radius as well
-		background-color:$color5-base;
-		display: inline-block;
+    // Input-box radius : note you will need
+    // to update input left top/bottom radius as well
+    background-color:$color5-base;
+    display: inline-block;
 
-		border-radius: $input-box-el-border-radius;
+    border-radius: $input-box-el-border-radius;
 
-		// Common settings for input, and suffix label
-		.input-email, .input-suffix {
-			padding:0;
-			margin:0;
-			font-size:1rem;
-			padding-top:0.5rem;
-			padding-bottom:0.5rem;
-			outline: none;
-		}
+    // Common settings for input, and suffix label
+    .input-email, .input-suffix {
+      padding:0;
+      margin:0;
+      font-size:1rem;
+      padding-top:0.5rem;
+      padding-bottom:0.5rem;
+      outline: none;
+    }
 
-		// Input email styling
-		.input-email {
-			border:0px;
-			width: 14rem;
-			display: inline-block;
-			text-align:center;
+    // Input email styling
+    .input-email {
+      border:0px;
+      width: 14rem;
+      display: inline-block;
+      text-align:center;
 
-			// Border radius overwrite
-			border-top-left-radius: $input-box-el-border-radius;
-			border-bottom-left-radius: $input-box-el-border-radius;
-			border-top-right-radius: 0rem;
-			border-bottom-right-radius: 0rem;
+      // Border radius overwrite
+      border-top-left-radius: $input-box-el-border-radius;
+      border-bottom-left-radius: $input-box-el-border-radius;
+      border-top-right-radius: 0rem;
+      border-bottom-right-radius: 0rem;
 
-			// input text color
-			color: $dark-text;
-		}
+      // input text color
+      color: $dark-text;
+    }
 
-		// Input email suffix
-		.input-suffix {
-			width: 12rem;
-			display: inline-block;
-			padding-left:1rem;
-			padding-right:1rem;
+    // Input email suffix
+    .input-suffix {
+      width: 12rem;
+      display: inline-block;
+      padding-left:1rem;
+      padding-right:1rem;
 
-			// Text with subtle fade out
-			color: fade-out($dark-text, 0.3);
+      // Text with subtle fade out
+      color: fade-out($dark-text, 0.3);
 
-		}
-	}
+    }
+  }
 
-	// Submit box
-	.submit-box {
-		display:inline-block;
-		margin-left:1rem;
-	}
-	// Submission button styling
-	.submit	{
-		padding: 0.5rem 1rem 0.5rem 1rem;
-		margin:0;
-		border: 0;
+  // Submit box
+  .submit-box {
+    display:inline-block;
+    margin-left:1rem;
+  }
+  // Submission button styling
+  .submit  {
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    margin:0;
+    border: 0;
 
-		font-size:1rem;
-		font-weight: bold;
+    font-size:1rem;
+    font-weight: bold;
 
-		background: $cta-base;
-		color: $cta-base-text;
+    background: $cta-base;
+    color: $cta-base-text;
 
-		border-radius: $input-box-el-border-radius;
+    border-radius: $input-box-el-border-radius;
 
-		font-size: 100%;
-		font-family: inherit;
-		text-transform: none;
-		-webkit-appearance: button;
-	}
+    font-size: 100%;
+    font-family: inherit;
+    text-transform: none;
+    -webkit-appearance: button;
+  }
 
-	// Hover submit button styling
-	.submit:hover {
-		background: $cta-hover;
-		color: $cta-hover-text;
-	}
+  // Hover submit button styling
+  .submit:hover {
+    background: $cta-hover;
+    color: $cta-hover-text;
+  }
 
-	@media only screen and (max-width:760px) {
-		// Collapes the inbox input into 2 lines
-		.input-box {
-			display: inline-block;
-			vertical-align: middle;
-			width: 75%;
-			.input-email {
-				border-top-right-radius: $input-box-el-border-radius;
-				border-bottom-left-radius: 0;
-				width: 100%;
-				height:2rem;
-			}
-		}
+  @media only screen and (max-width:760px) {
+    // Collapes the inbox input into 2 lines
+    .input-box {
+      display: inline-block;
+      vertical-align: middle;
+      width: 75%;
+      .input-email {
+        border-top-right-radius: $input-box-el-border-radius;
+        border-bottom-left-radius: 0;
+        width: 100%;
+        height:2rem;
+      }
+    }
 
-		// Increase submit button height
-		.submit-box {
-			margin-top:1.25rem;
-			margin-left:0;
+    // Increase submit button height
+    .submit-box {
+      margin-top:1.25rem;
+      margin-left:0;
 
-			display: block;
-			vertical-align: middle;
+      display: block;
+      vertical-align: middle;
 
-			.submit {
-				display: inline;
-				width: 75%;
-				height:2.5rem;
-			}
-		}
-	}
+      .submit {
+        display: inline;
+        width: 75%;
+        height:2.5rem;
+      }
+    }
+  }
 }
 
 //
 // Deployment guide content
 //
 .info-guide {
-	padding: 1rem;
+  padding: 1rem;
 
-	.features {
-		padding-top:0.5rem;
-		margin:auto;
-		display:flex;
-		flex-direction:row;
-		justify-content:center;
-	}
+  .features {
+    padding-top:0.5rem;
+    margin:auto;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+  }
 
-	.feature-card {
-		flex-grow: 1;
-		flex-shrink: 1;
-		flex-basis: 0;
-		padding-left:1rem;
-		padding-right:1rem;
-		color: #818181;
-		h3 { color: $dark-text; }
-	}
+  .feature-card {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    padding-left:1rem;
+    padding-right:1rem;
+    color: #818181;
+    h3 { color: $dark-text; }
+  }
 
-	.fas {
-		margin-right:0.5rem;
-	}
+  .fas {
+    margin-right:0.5rem;
+  }
 
-	@media only screen and (max-width:800px) {
-		.features {
-			flex-direction:column;
-		}
-	}
+  @media only screen and (max-width:800px) {
+    .features {
+      flex-direction:column;
+    }
+  }
 }
 
 .footer {
-	color: #818181;
-	font-size: 13px;
-	text-align: center;
-	margin-top: 50px;
+  color: #818181;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 50px;
 }
 
 //
 // Bear
 //
 .bear-container {
-	position: relative;
-	margin: auto;
-	background: #DDE8F9;
-	width: 300px;
-	height: 300px;
-	border-radius: 100%;
-	overflow: hidden;
-	border: $black solid 10px;
+  position: relative;
+  margin: auto;
+  background: #DDE8F9;
+  width: 300px;
+  height: 300px;
+  border-radius: 100%;
+  overflow: hidden;
+  border: $black solid 10px;
 
-	.bear {
-		border: $black solid 10px;
-		background: $dark-brown;
-		width: 176px;
-		height: 300px;
-		z-index: 10;
-		position: absolute;
-		top: 150px;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		margin: auto;
-		border-radius: 110px;
-	}
-	.left-ear {
-		border: $black solid 10px;
-		position: absolute;
-		width: 42px;
-		height: 42px;
-		background-color: $light-brown;
-		border-radius: 100%;
-		top: 58px;
-		left: 50px;
-	}
-	.right-ear {
-		border: $black solid 10px;
-		position: absolute;
-		width: 42px;
-		height: 42px;
-		background-color: $light-brown;
-		border-radius: 100%;
-		top: 58px;
-		right: 50px;
-		animation: wiggle 2s ease-in-out;
-		animation-iteration-count: infinite;
-	}
-	.left-eye {
-		position: absolute;
-		width: 22px;
-		height: 22px;
-		background-color: $black;
-		border-radius: 100%;
-		top: 135px;
-		left: 96px;
-		z-index: 10;
-		animation: blink 2s ease-in-out forwards;
-		animation-iteration-count: infinite;
-	}
-	.right-eye {
-		position: absolute;
-		width: 22px;
-		height: 22px;
-		background-color: $black;
-		border-radius: 100%;
-		top: 135px;
-		right: 96px;
-		z-index: 10;
-		animation: blink 2s ease-in-out forwards;
-		animation-iteration-count: infinite;
-	}
+  .bear {
+    border: $black solid 10px;
+    background: $dark-brown;
+    width: 176px;
+    height: 300px;
+    z-index: 10;
+    position: absolute;
+    top: 150px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 110px;
+  }
+  .left-ear {
+    border: $black solid 10px;
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    background-color: $light-brown;
+    border-radius: 100%;
+    top: 58px;
+    left: 50px;
+  }
+  .right-ear {
+    border: $black solid 10px;
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    background-color: $light-brown;
+    border-radius: 100%;
+    top: 58px;
+    right: 50px;
+    animation: wiggle 2s ease-in-out;
+    animation-iteration-count: infinite;
+  }
+  .left-eye {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background-color: $black;
+    border-radius: 100%;
+    top: 135px;
+    left: 96px;
+    z-index: 10;
+    animation: blink 2s ease-in-out forwards;
+    animation-iteration-count: infinite;
+  }
+  .right-eye {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background-color: $black;
+    border-radius: 100%;
+    top: 135px;
+    right: 96px;
+    z-index: 10;
+    animation: blink 2s ease-in-out forwards;
+    animation-iteration-count: infinite;
+  }
 
-	.nose {
-		position: absolute;
-		width: 100px;
-		height: 80px;
-		background-color: $light-brown;
-		border-radius: 100%;
-		top: 150px;
-		left: 0px;
-		right: 0px;
-		margin: auto;
-		z-index: 10;
+  .nose {
+    position: absolute;
+    width: 100px;
+    height: 80px;
+    background-color: $light-brown;
+    border-radius: 100%;
+    top: 150px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    z-index: 10;
 
-		&::before {
-			content: '';
-			background-color: $black;
-			width: 36px;
-			height: 30px;
-			display: block;
-			border-radius: 100%;
-			left: 0;
-			right: 0;
-			margin: auto;
-			margin-top: 8px;
-		}
-	}
-	.mouth {
-		width: 55px;
-		height: 15px;
-		border-bottom-left-radius: 20px;
-		border-bottom-right-radius: 20px;
-		border: 10px solid $black;
-		border-top: 0;
-		position: absolute;
-		top: 192px;
-		z-index: 10;
-		left: 0;
-		right: 0;
-		margin: auto;
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		box-sizing: border-box;
+    &::before {
+      content: '';
+      background-color: $black;
+      width: 36px;
+      height: 30px;
+      display: block;
+      border-radius: 100%;
+      left: 0;
+      right: 0;
+      margin: auto;
+      margin-top: 8px;
+    }
+  }
+  .mouth {
+    width: 55px;
+    height: 15px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: 10px solid $black;
+    border-top: 0;
+    position: absolute;
+    top: 192px;
+    z-index: 10;
+    left: 0;
+    right: 0;
+    margin: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 
-		&::before {
-			content: '';
-			width: 10px;
-			height: 22px;
-			background-color: $black;
-			display: block;
-			left: 0;
-			right: 0;
-			margin: auto;
-			margin-top: -10px;
-		}
-	}
+    &::before {
+      content: '';
+      width: 10px;
+      height: 22px;
+      background-color: $black;
+      display: block;
+      left: 0;
+      right: 0;
+      margin: auto;
+      margin-top: -10px;
+    }
+  }
 
-	.hand {
-		border: $black solid 10px;
-		z-index: 120;
-		background: #775D46;
-		background-image: radial-gradient(circle at 10px 25px, $light-brown 4px, transparent 4px ),radial-gradient(circle at 20px 18px, $light-brown 4px, transparent 4px ),radial-gradient(circle at 32px 18px, $light-brown 4px, transparent 4px ),radial-gradient(circle at 42px 25px, $light-brown 4px, transparent 4px ),radial-gradient(circle at 26px 40px, $light-brown 12px, transparent 12px );
-		width: 51px;
-		height: 150px;
-		position: absolute;
-		top: 150px;
-		left: 0;
-		border-radius: 100px;
-		animation: move .6s ease-in-out forwards;
-		animation-iteration-count: infinite;
-	}
+  .hand {
+    border: $black solid 10px;
+    z-index: 120;
+    background: #775D46;
+    background-image: radial-gradient(circle at 10px 25px, $light-brown 4px, transparent 4px ),radial-gradient(circle at 20px 18px, $light-brown 4px, transparent 4px ),radial-gradient(circle at 32px 18px, $light-brown 4px, transparent 4px ),radial-gradient(circle at 42px 25px, $light-brown 4px, transparent 4px ),radial-gradient(circle at 26px 40px, $light-brown 12px, transparent 12px );
+    width: 51px;
+    height: 150px;
+    position: absolute;
+    top: 150px;
+    left: 0;
+    border-radius: 100px;
+    animation: move .6s ease-in-out forwards;
+    animation-iteration-count: infinite;
+  }
 }
 
 @keyframes move {
-	0% { top: 170px; }
-	35% { top: 150px; }
-	100% { top: 170px; }
+  0% { top: 170px; }
+  35% { top: 150px; }
+  100% { top: 170px; }
 }
 
 @keyframes blink {
-	0% { height: 22px; }
-	10% {
-		margin-top: 8px;
-		height: 6px;
-	}
-	30% {
-		margin-top: 0px;
-		height: 22px;
-	}
-	100% { height: 22px; }
+  0% { height: 22px; }
+  10% {
+    margin-top: 8px;
+    height: 6px;
+  }
+  30% {
+    margin-top: 0px;
+    height: 22px;
+  }
+  100% { height: 22px; }
 }
 
 @keyframes wiggle {
-	0% {
-		top: 58px;
-		right: 50px;
-	}
-	10% {
-		top: 63px;
-		right: 45px;
-	}
-	20% {
-		top: 58px;
-		right: 50px;
-	}
-	30% {
-		top: 63px;
-		right: 45px;
-	}
-	50% {
-		top: 58px;
-		right: 50px;
-	}
+  0% {
+    top: 58px;
+    right: 50px;
+  }
+  10% {
+    top: 63px;
+    right: 45px;
+  }
+  20% {
+    top: 58px;
+    right: 50px;
+  }
+  30% {
+    top: 63px;
+    right: 45px;
+  }
+  50% {
+    top: 58px;
+    right: 50px;
+  }
 }

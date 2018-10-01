@@ -13,8 +13,8 @@ projectDir="$(cd "$firebaseDir/../.."; pwd)"
 echo ">> Assuming project directory of : $projectDir"
 
 # Clearing out firebase public / functions folder
-rm -rf "$firebaseDir/functions/"; 
-rm -rf "$firebaseDir/public/"; 
+rm -rf "$firebaseDir/functions/";
+rm -rf "$firebaseDir/public/";
 mkdir -p "$firebaseDir/public/cli/";
 mkdir -p "$firebaseDir/functions/";
 
@@ -33,7 +33,7 @@ git rev-parse HEAD > "$firebaseDir/public/GITHASH"
 # Debug for file tree
 cd "$firebaseDir"
 if [ ! -z "DISPLAY_DEPLOY_FILE_TREE" ]; then
-	tree -L 3;
+  tree -L 3;
 fi
 
 # Calling firebase deploy, with parameters passing forward
