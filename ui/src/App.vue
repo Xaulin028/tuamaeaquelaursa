@@ -4,22 +4,6 @@
 	</div>
 </template>
 
-<script>
-import shareConfig from '@/../config/shareConfig.js'
-export default {
-	name: 'App',
-	data: () => {
-		return {
-			githubLink: shareConfig.githubForkLink,
-			githubAriaLabel: shareConfig.githubAriaLabel,
-			tweetDataUrl: shareConfig.tweetDataUrl,
-			tweetMsg: shareConfig.tweetMessage,
-			isShare: shareConfig.enabled
-		}
-	}
-}
-</script>
-
 <style lang="scss" rel="stylesheet/scss">
 	@import url("https://unpkg.com/purecss@1.0.0/build/pure-min.css");
 	@import "scss/_producthunt.scss";
