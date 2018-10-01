@@ -4,12 +4,12 @@ outfile="inboxkitten"
 
 # The go build command
 dependencies:
-	./go.sh get ./src/...
+  ./go.sh get ./src/...
 
 build:
-	mkdir -p bin
-	./go.sh build -o "bin/$(outfile)" "src/$(mainfile)" 
+  mkdir -p bin
+  ./go.sh build -o "bin/$(outfile)" "src/$(mainfile)" 
 
 clean:
-	rm -fr ./bin/*
-	./go.sh clean
+  rm -fr ./bin/*
+  ./go.sh clean
