@@ -117,7 +117,7 @@ export default {
 
     formatName (sender) {
       let [name, emailUnformatted, ...rest] = sender.split(' <')
-      let [email, ...unknown] = emailUnformatted.split('>')
+      let [email, ...unknown] = (emailUnformatted || '').split('>')
       return email
     },
 
