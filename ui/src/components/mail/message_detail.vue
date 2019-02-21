@@ -57,8 +57,7 @@
       },
       formatHtml (content) {
         let iframe = document.getElementById('message-content')
-        let html = content
-        iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html)
+        iframe.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(content)
       },
       formatName (sender) {
         let [name, ...rest] = sender.split(' <')
