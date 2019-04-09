@@ -46,7 +46,7 @@
       <div class="sharethis-inline-share-buttons"></div>
     </div>
     <div class="footer">
-      <p>Orgulhosamente desenvolvido por Ronaldo Fuzinato, Cassiano Calegari e o pessoal do <a href="https://autentique.com.br" target="_blank">Autentique.com.br</a>. Com base no projeto <a href="https://github.com/uilicious/inboxkitten" target="_blank">uilicious/inboxkitten</a></p>
+      <p>Orgulhosamente desenvolvido por Ronaldo Fuzinato, Éderson T. Szlachta, Cassiano Calegari e o pessoal do <a href="https://autentique.com.br" target="_blank">Autentique.com.br</a>. Com base no projeto <a href="https://github.com/uilicious/inboxkitten" target="_blank">uilicious/inboxkitten</a></p>
     </div>
   </div>
 </template>

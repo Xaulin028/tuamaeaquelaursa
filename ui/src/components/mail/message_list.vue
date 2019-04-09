@@ -1,18 +1,21 @@
 <template>
     <vue-scroll :ops="vueScrollBarOps">
       <pulse-loader v-if="refreshing" class="loading"></pulse-loader>
-      <div class="table-box" v-if="listOfMessages.length > 0">
-        <div :class="rowCls(index)" v-for="(msg, index) in listOfMessages" :key="msg.url"
-             @click="getMessage(msg.storage.url)">
 
-          <div class="row-info">
-            <div class="row-name">{{formatName(msg.message.headers.from)}}</div>
-            <div class="row-subject">{{(msg.message.headers.subject)}}</div>
-          </div>
+      <table class="pure-table pure-table-horizontal" v-if="listOfMessages.length > 0">
+        <tbody>
+          <tr :class="rowCls(index)" v-for="(msg, index) in listOfMessages" :key="msg.url" @click="getMessage(msg.storage.url)">
+            <td class="message-box">
+              <div class="pure-g">
+                <div class="pure-u-1 pure-u-md-3-8 message-from">{{getSenderName(msg.message.headers.from)}}</div>
+                <div class="pure-u-1 pure-u-md-5-8 message-subject">{{(msg.message.headers.subject)}}</div>
+              </div>
+            </td>
+            <td class="message-time">{{calculateTime(msg)}}</td>
+          </tr>
+        </tbody>
+      </table>
 
-          <div class="row-time">{{calculateTime(msg)}}</div>
-        </div>
-      </div>
       <div class="no-mails" v-if="listOfMessages.length == 0">
         <p>Tua mãe, aquela ursa, ainda não recebeu nenhum email =/</p>
       </div>
@@ -115,17 +118,16 @@ export default {
       }
     },
 
-    formatName (sender) {
-      let [name, emailUnformatted, ...rest] = sender.split(' <')
-      let [email, ...unknown] = (emailUnformatted || '').split('>')
-      return email
+    getSenderEmail (sender) {
+      return sender.match(/[^\s@]+@[^\s@]+\.[^\s@]+/)[0].replace(/(<|>)/g, '')
+    },
+
+    getSenderName (sender) {
+      return sender.replace(/[^\s@]+@[^\s@]+\.[^\s@]+/, '').trim().trim('"')
     },
 
     rowCls (index) {
-      if (index % 2 === 0) {
-        return 'table-row even'
-      }
-      return 'table-row odd'
+      return 'pure-table-' + ((index % 2 === 0) ? 'even' : 'odd')
     }
   },
   components: {
@@ -136,52 +138,33 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
-  @import '@/scss/_color.scss';
-
-  .table-box {
+  table {
     width: 100%;
-    height: auto;
-    .table-row {
-      display: flex;
-      flex-direction: row;
-      /*justify-content: space-evenly;*/
-      justify-content: flex-start;
-      border: 3px solid white;
-      border-bottom: 3px solid #20a0ff;
 
-      .row-info {
-        width: 75%;
-
-        .row-name {
-          font-weight: bold;
-          text-align: left;
-        }
-      }
+    tr {
+      cursor: pointer;
+    }
+    .message-from {
+      font-size: 80%;
+    }
+    .message-from,
+    .message-subject {
+      text-align: left;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .message-time {
+      text-align: right;
+      width: 4.5em;
     }
   }
-
-  .table-row:hover {
-    background-color: #eee;
-  }
-
-  .no-mails {
-    color: #818181;
-    text-align: center;
-    vertical-align: center;
-    overflow: auto;
-    margin-top: 2rem;
-    z-index: 10;
-  }
-
-  .refresh-button {
-    border: 3px solid black;
-    background-color: $cta-base;
-    color: $cta-base-text;
-  }
-
-  .refresh-button:hover {
-    background-color: $cta-hover;
-    color: $cta-hover-text;
+  @media screen and (min-width:48em){
+    table {
+      .message-from {
+        font-size: 100%;
+      }
+    }
   }
 
   .loading {
@@ -189,69 +172,5 @@ export default {
     position:absolute;
     padding-top: 5rem;
     left:50%;
-  }
-
-  @media (min-width: 760px) {
-    .table-row {
-      padding: 1rem;
-      .row-info {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        .row-name {
-        }
-      }
-      border-bottom: 1px solid #20a0ff;
-    }
-  }
-
-  @media (max-width: 760px) {
-    .table-row {
-      display: flex;
-      flex-direction: row;
-      width: 98vw;
-      margin: auto;
-      background-color: white;
-      border-bottom: 1px solid #20a0ff;
-
-      .row-info {
-        text-align: left;
-        padding-left: 0.5rem;
-        .row-name {
-          font-size: 1rem;
-          font-weight: bold;
-          padding: 0.5rem;
-          /*background: #06FFAB;*/
-          width: 100%;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          overflow: hidden;
-        }
-        .row-subject {
-          /*background-color: coral;*/
-          width: 100%;
-          padding-left: 0.5rem;
-          padding-bottom: 0.5rem;
-          font-size: 0.75rem;
-          font-weight: bold;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          overflow: hidden;
-        }
-      }
-
-      .row-time {
-        width: 20%;
-        font-size: 12px;
-        text-align: center;
-        vertical-align: middle;
-        padding: 0.5rem;
-        padding-left: 0;
-      }
-    }
-
-    .loading{
-      left:40%;
-    }
   }
 </style>
