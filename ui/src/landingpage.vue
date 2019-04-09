@@ -99,4 +99,8 @@
 <style lang="scss" rel="stylesheet/scss">
   @import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
   @import "scss/landingpage.scss";
+
+  .landing-page {
+    text-align: center;
+  }
 </style>
