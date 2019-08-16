@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import store from '@/store'
+import ga from 'vue-ga';
+import store from '@/store';
 import CreateEmail from '@/components/createEmail.vue';
 import MessageList from '@/components/messageList.vue';
 import MessageDetail from '@/components/messageDetail.vue';
@@ -18,7 +19,7 @@ const RouteBeforeEnter = (to, from, next) => {
   next();
 }
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -42,4 +43,8 @@ export default new Router({
   scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0 };
   }
-})
+});
+
+ga(router, 'UA-126612006-1');
+
+export default router
