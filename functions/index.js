@@ -17,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post(`/${config.endpoint}`, function(request, response, next) {
 
 	let user_hash = crypto.createHash('md5').update(request.body['recipient'] || 'default').digest('hex');
+	let now = Date.now();
 	let message = box.child(user_hash).push({
 		from       : request.body['from']       || null,
 		recipient  : request.body['recipient']  || null,
@@ -25,13 +26,13 @@ app.post(`/${config.endpoint}`, function(request, response, next) {
 		timestamp  : request.body['timestamp']  || null,
 		bodyHtml   : request.body['body-html']  || null,
 		bodyPlain  : request.body['body-plain'] || null,
-		created_at : Date.now(),
+		created_at : now,
 	});
 
 	index.push({
       box        : user_hash,
       message    : message.key,
-      created_at : message.val().created_at
+      created_at : now
     })
 
 	response.send({"message":"Post received. Thanks!"});
