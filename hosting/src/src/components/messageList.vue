@@ -8,7 +8,7 @@
       </router-link>
     </div>
     <div class="no-messages" v-if="messages.length == 0">
-      No emails received, yet!
+      <p>Tua mãe, aquela ursa, ainda não recebeu emails =/</p>
     </div>
   </section>
 </template>
@@ -59,7 +59,10 @@
 
   .message-list {
     background-color: #FFF;
-    // padding: 1rem 0;
+  }
+  .no-messages {
+    padding: 1rem;
+    text-align: center;
   }
   .the-message {
     position: relative;
