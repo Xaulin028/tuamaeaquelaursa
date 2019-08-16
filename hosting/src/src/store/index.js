@@ -2,9 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import md5 from 'blueimp-md5';
 import firebase from '@firebase/app';
-import '@firebase/app';
 import '@firebase/database';
-//
+
 import { hostingConfig, firebaseConfig } from '@/../config/app.js';
 
 Vue.use(Vuex);
