@@ -7,7 +7,8 @@ const config     = require('./config/app.js');
 
 admin.initializeApp();
 
-const box = admin.database().ref('/INBOX');
+const box   = admin.database().ref('/INBOX');
+const index = admin.database().ref('/INDEX');
 const app = express();
 
 app.use(bodyParser.json());
@@ -16,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post(`/${config.endpoint}`, function(request, response, next) {
 
 	let user_hash = crypto.createHash('md5').update(request.body['recipient'] || 'default').digest('hex');
-	box.child(user_hash).push({
+	let message = box.child(user_hash).push({
 		from       : request.body['from']       || null,
 		recipient  : request.body['recipient']  || null,
 		sender     : request.body['sender']     || null,
@@ -26,6 +27,12 @@ app.post(`/${config.endpoint}`, function(request, response, next) {
 		bodyPlain  : request.body['body-plain'] || null,
 		created_at : Date.now(),
 	});
+
+	index.push({
+      box        : user_hash,
+      message    : message.key,
+      created_at : message.val().created_at
+    })
 
 	response.send({"message":"Post received. Thanks!"});
 });
