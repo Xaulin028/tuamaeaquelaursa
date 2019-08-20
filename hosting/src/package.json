@@ -14,7 +14,6 @@
     "@firebase/app": "^0.4.14",
     "@firebase/database": "^0.4.12",
     "blueimp-md5": "^2.11.1",
-    "leite": "^0.2.0",
     "normalize.css": "^8.0.1",
     "vue": "^2.6.10",
     "vue-ga": "^1.1.0",
