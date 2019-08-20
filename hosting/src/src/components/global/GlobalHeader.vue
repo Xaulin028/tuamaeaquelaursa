@@ -36,7 +36,7 @@
       position: absolute;
       top: 1rem;
       left: 1rem;
-      width: 1rem;
+      width: 3rem;
     }
 
     &-bear {
