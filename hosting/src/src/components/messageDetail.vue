@@ -56,6 +56,13 @@
   @import '@/scss/_color.scss';
 
   .message-details {
+    &-header,
+    &-body {
+      max-width: 53rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     &-header {
       border-bottom: 1px solid $app-background;
       padding-left: 1rem;
