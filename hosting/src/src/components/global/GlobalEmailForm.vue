@@ -72,6 +72,8 @@
     &-input-email {
       color: lighten($dark-text, 20%);
       text-overflow: ellipsis;
+      width: calc(100% - 1rem);
+      padding-left: 1rem;
     }
     &-input-suffix {
       color: lighten($dark-text, 30%);
@@ -120,6 +122,8 @@
       &-input-email   { flex-grow: 2.25; }
       &-input-suffix  { flex-grow: 2.00; }
       &-submit-button { flex-grow: 0.75; }
+
+      &-input-email   { width: 100%; padding-left: 0; }
     }
   }
 </style>
