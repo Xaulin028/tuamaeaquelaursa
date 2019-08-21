@@ -32,14 +32,34 @@ const webpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackExternalsPlugin({
       externals: [
         {
+          module: 'normalize.css',
+          entry: 'https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css',
+          global: 'normalize.css',
+        },
+        {
+          module: 'core-js',
+          entry: 'https://cdnjs.cloudflare.com/ajax/libs/core-js/2.6.9/core.min.js',
+          global: 'core-js',
+        },
+        {
+          module: 'underscore',
+          entry: 'https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js',
+          global: 'underscore',
+        },
+        {
+          module: 'lodash',
+          entry: 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js',
+          global: 'lodash',
+        },
+        {
           module: 'blueimp-md5',
           entry: 'https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.11.1/js/md5.min.js',
           global: 'md5',
         },
         {
-          module: 'normalize.css',
-          entry: 'https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css',
-          global: 'normalize.css',
+          module: 'moment',
+          entry: 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js',
+          global: 'moment',
         },
         {
           module: 'vue',
@@ -65,11 +85,6 @@ const webpackConfig = merge(baseWebpackConfig, {
           module: 'firebase-database',
           entry: 'https://www.gstatic.com/firebasejs/6.3.5/firebase-database.js',
           global: 'firebase-database',
-        },
-        {
-          module: 'moment',
-          entry: 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js',
-          global: 'moment',
         },
       ],
     }),
