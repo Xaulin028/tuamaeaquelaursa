@@ -8,6 +8,7 @@
     <div class="bear-nose"></div>
     <div class="bear-mouth"></div>
     <div class="bear-hand"></div>
+    <div class="bear-frame"></div>
   </div>
 </template>
 
@@ -29,7 +30,8 @@
     height: 300px;
     border-radius: 100%;
     overflow: hidden;
-    border: $bear-border-shape;
+    mask-image: radial-gradient(white, black);
+    backface-visibility: hidden;
 
     &-body {
       border: $bear-border-shape;
@@ -155,12 +157,19 @@
       animation: move .6s ease-in-out forwards;
       animation-iteration-count: infinite;
     }
+
+    &-frame {
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      border: $bear-border-shape;
+      border-radius: 100%;
+    }
   }
 
   @keyframes move {
-      0% { transform: translateY( 20px ); }
-     35% { transform: translateY(  0px ); }
-    100% { transform: translateY( 20px ); }
+      0% { transform: translate3d( 0, 20px, 0 ); }
+     35% { transform: translate3d( 0,  0px, 0 ); }
+    100% { transform: translate3d( 0, 20px, 0 ); }
   }
 
   @keyframes blink {
