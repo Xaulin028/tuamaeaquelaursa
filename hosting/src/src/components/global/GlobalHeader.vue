@@ -36,7 +36,9 @@
       position: absolute;
       top: 1rem;
       left: 1rem;
-      width: 3rem;
+      width: 2rem;
+      opacity: 0;
+      animation: fadeIn .5s ease-in-out forwards;
     }
 
     &-bear {
@@ -89,5 +91,8 @@
     }
   }
 
-
+  @keyframes fadeIn {
+      0% { opacity: 0.0; }
+    100% { opacity: 0.7; }
+  }
 </style>
