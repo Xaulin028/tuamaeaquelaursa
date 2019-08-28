@@ -1,4 +1,4 @@
-[![tuamaeaquelaursa header](./ui/static/apple-icon.png)](https://tuamaeaquelaursa.com)
+[![tuamaeaquelaursa header](./hosting/src/static/apple-icon.png)](https://tuamaeaquelaursa.com)
 
 # Emails descartáveis @tuamaeaquelaursa.com
 
