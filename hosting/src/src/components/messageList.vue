@@ -1,7 +1,7 @@
 <template>
   <section class="message-list">
     <div class="all-messages" v-if="messages.length > 0">
-      <router-link class="the-message" v-for="(msg, index) in messages" :key="index" :to="[$route.params.email, msg.key].join('/')" tag="div">
+      <router-link class="the-message" v-for="(msg, index) in messages" :key="index" :to="['', $route.params.email, msg.key].join('/')" tag="div">
         <div class="the-message-from">{{msg.from}}</div>
         <div class="the-message-subject">{{msg.subject}}</div>
         <div class="the-message-time">{{fancy_date(msg.timestamp)}}</div>
