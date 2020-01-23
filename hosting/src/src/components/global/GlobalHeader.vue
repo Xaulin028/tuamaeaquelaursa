@@ -1,6 +1,6 @@
 <template>
   <header class="global-header">
-    <router-link class="global-header-back-button" v-if="$route.params.email" :to="'/' + ($route.params.message ? $route.params.email : '')"><img src="@/assets/chevron-left.svg"></router-link>
+    <router-link class="global-header-back-button" v-if="$route.params.email" :to="'/' + ($route.params.message ? $route.params.email : '')"><img src="@/assets/chevron-left.svg" style="display:block;"></router-link>
 
     <GlobalBear class="global-header-bear" />
 
@@ -31,14 +31,17 @@
     padding: 1rem 1rem 0;
     transition: $duration padding;
     overflow: hidden;
+    position: relative;
 
     &-back-button {
       position: absolute;
-      top: 1rem;
+      margin-top: -1.25rem;
+      top: 50%;
       left: 1rem;
       width: 2rem;
       opacity: 0;
       animation: fadeIn .5s ease-in-out forwards;
+      z-index: 3;
     }
 
     &-bear {

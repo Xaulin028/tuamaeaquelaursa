@@ -7,7 +7,7 @@
         <div class="message-details-header-info-date">{{fancy_date(message.timestamp)}}</div>
       </div>
     </header>
-    <main class="message-details-body" v-html="message.bodyHtml"></main>
+    <main :class="'message-details-body' + (message.bodyHtml ? '' : ' nl2br')" v-html="message.bodyHtml || message.bodyPlain"></main>
   </section>
 </template>
 
@@ -55,12 +55,20 @@
 <style lang="scss" scoped>
   @import '@/scss/_color.scss';
 
+  .nl2br {
+    white-space: pre;
+    font-family: monospace;
+  }
+
   .message-details {
     &-header,
     &-body {
       max-width: 53rem;
       margin-left: auto;
       margin-right: auto;
+    }
+    &-body {
+      padding-top: 1rem;
     }
 
     &-header {
