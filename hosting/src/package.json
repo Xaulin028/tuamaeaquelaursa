@@ -8,11 +8,10 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js",
-    "deploy": "firebase deploy --only hosting"
+    "deploy": "npm run build && npm run deploy-only",
+    "deploy-only": "firebase deploy --only hosting"
   },
   "dependencies": {
-    "@firebase/app": "^0.4.14",
-    "@firebase/database": "^0.4.12",
     "blueimp-md5": "^2.11.1",
     "normalize.css": "^8.0.1",
     "vue": "^2.6.10",

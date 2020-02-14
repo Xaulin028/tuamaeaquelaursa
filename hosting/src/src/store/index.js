@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import md5 from 'blueimp-md5';
-import firebase from '@firebase/app';
-import '@firebase/database';
+import * as firebase from "firebase/app";
+import 'firebase/database';
 
 import { hostingConfig, firebaseConfig } from '@/../config/app.js';
 
@@ -49,13 +49,15 @@ const store = new Vuex.Store({
 
       console.log('mutation: connect_to_box');
     },
-    hydrate_messages: (state, msg) => {
-      if ( state._user_box === null )
-        throw 'user_box undefined.';
-
+    append_messages: (state, msg) => {
       state.messages.unshift(msg);
 
-      console.log('mutation: hydrate_messages');
+      console.log('mutation: append_messages');
+    },
+    remove_messages: (state, msg_key) => {
+      state.messages.forEach((_v, _id, _ar) => { _v.key === msg_key && _ar.splice(_id, 1) });
+
+      console.log('mutation: remove_messages ' + msg_key);
     },
     hydrate_message: (state, msg) => {
       state.message = msg;
@@ -88,7 +90,11 @@ const store = new Vuex.Store({
         var res = snapshot.val();
         res.key = snapshot.key;
 
-        commit('hydrate_messages', res);
+        commit('append_messages', res);
+      });
+
+      state._user_box.on('child_removed', (snapshot) => {
+        commit('remove_messages', snapshot.key);
       });
     },
     hydrate_message: ({ commit, state }, params) => {
