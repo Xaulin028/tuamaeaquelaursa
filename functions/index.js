@@ -48,7 +48,7 @@ app.post(`/${config.endpoint}`, function(request, response, next) {
 /**
  * Remove old messages
  **/
-const CUT_OFF_TIME = Date.now() - 4 * 86400000;
+const CUT_OFF_TIME = Date.now() - 86400000;
 async function removeOldMessages() {
   const items = await index.orderByChild('created_at').endAt(CUT_OFF_TIME).once('value');
 
