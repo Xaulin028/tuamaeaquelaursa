@@ -76,16 +76,6 @@ const webpackConfig = merge(baseWebpackConfig, {
           entry: 'https://unpkg.com/vuex@3.1.1/dist/vuex.min.js',
           global: 'Vuex',
         },
-        {
-          module: 'firebase-app',
-          entry: 'https://www.gstatic.com/firebasejs/6.3.5/firebase-app.js',
-          global: 'firebase-app',
-        },
-        {
-          module: 'firebase-database',
-          entry: 'https://www.gstatic.com/firebasejs/6.3.5/firebase-database.js',
-          global: 'firebase-database',
-        },
       ],
     }),
     // http://vuejs.github.io/vue-loader/en/workflow/production.html

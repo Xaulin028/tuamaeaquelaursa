@@ -4,7 +4,7 @@
       <h1 class="message-details-header-subject">{{message.subject}}</h1>
       <div class="message-details-header-info">
         <div class="message-details-header-info-sender">{{message.from}}</div>
-        <div class="message-details-header-info-date">{{fancy_date(message.timestamp)}}</div>
+        <div class="message-details-header-info-date">{{fancy_date(message.created_at)}}</div>
       </div>
     </header>
     <main :class="'message-details-body' + (message.bodyHtml ? '' : ' nl2br')" v-html="message.bodyHtml || message.bodyPlain"></main>
@@ -26,7 +26,7 @@
       ...mapActions(['hydrate_message']),
       fancy_date( date ) {
         let cur_date = new Date();
-        let msg_date = new Date( date * 1000 );
+        let msg_date = new Date( date );
         let options = {
           hour: 'numeric',
           minute: 'numeric'

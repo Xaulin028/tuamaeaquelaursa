@@ -1,14 +1,19 @@
 <template>
   <section class="message-list">
-    <div class="all-messages" v-if="messages.length > 0">
-      <router-link class="the-message" v-for="(msg, index) in messages" :key="index" :to="['', $route.params.email, msg.key].join('/')" tag="div">
-        <div class="the-message-from">{{msg.from}}</div>
-        <div class="the-message-subject">{{msg.subject}}</div>
-        <div class="the-message-time">{{fancy_date(msg.timestamp)}}</div>
-      </router-link>
+    <div class="no-messages" v-if="loader">
+      <p>Tua mãe, aquela ursa foi buscar as correspondências para você.</p>
     </div>
-    <div class="no-messages" v-if="messages.length == 0">
-      <p>Tua mãe, aquela ursa, ainda não recebeu emails =/</p>
+    <div v-else>
+      <div class="all-messages" v-if="messages.length > 0">
+        <router-link class="the-message" v-for="(msg, index) in messages" :key="index" :to="['', $route.params.email, msg.key].join('/')" tag="div">
+          <div class="the-message-from">{{msg.from}}</div>
+          <div class="the-message-subject">{{msg.subject}}</div>
+          <div class="the-message-time" :title="(new Date(msg.created_at)).toLocaleString()">{{fancy_date(msg.created_at)}}</div>
+        </router-link>
+      </div>
+      <div class="no-messages" v-if="messages.length == 0">
+        <p>Tua mãe, aquela ursa não encontrou tuas cartas.<br>¯\_(ツ)_/¯</p>
+      </div>
     </div>
   </section>
 </template>
@@ -18,7 +23,7 @@
 
   export default {
     name: 'MessageList',
-    computed: mapState([ 'messages' ]),
+    computed: mapState([ 'messages', 'loader' ]),
     beforeMount() {
       this.hydrate_messages(this.$route.params);
     },
@@ -28,25 +33,19 @@
       ...mapActions(['hydrate_messages']),
       fancy_date( date ) {
         let cur_date = new Date();
-        let msg_date = new Date( date * 1000 );
+        let msg_date = new Date( date );
         let options = {
           hour: 'numeric',
           minute: 'numeric'
         };
 
-        if ( msg_date.getMonth() < cur_date.getMonth() ) {
+        if ( msg_date.getDate() < cur_date.getDate() ) {
           options.weekday = 'short';
-          options.month = 'short';
           options.day = '2-digit';
-        } else {
-          if ( msg_date.getDate() < cur_date.getDate() ) {
-            options.weekday = 'short';
-            options.day = '2-digit';
-          }
-
-          if ( msg_date.getDate() == cur_date.getDate() )
-            options.second = 'numeric';
         }
+
+        if ( msg_date.getDate() == cur_date.getDate() )
+          options.second = 'numeric';
 
         return msg_date.toLocaleString(navigator.language, options);
       }
