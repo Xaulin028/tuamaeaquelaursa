@@ -17,7 +17,7 @@ const isValidRequest = (request) => CONFIG.token == request.query.token;
 
 
 const addNewMessage = (fields) => {
-    const user_hash = crypto.createHash('md5').update(fields.recipient || 'default').digest('hex');
+    const user_hash = crypto.createHash('md5').update(fields.recipient.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi).shift() || 'default').digest('hex');
     const cur_time  = Date.now();
 
     const message = inbox.child(user_hash).push({
@@ -36,6 +36,8 @@ const addNewMessage = (fields) => {
     });
 
     removeOldMessages();
+
+    console.log(`Received from ${fields.from} to ${fields.recipient} and hosted at INBOX/${user_hash}/${message.key}`);
 
     return {
         user    : user_hash,
