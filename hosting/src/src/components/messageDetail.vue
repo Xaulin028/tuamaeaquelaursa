@@ -1,6 +1,9 @@
 <template>
   <section class="message-details">
-    <header class="message-details-header">
+    <header class="message-details-header" v-if="!message.subject">
+      <h1 class="message-details-header-subject">Carregando...</h1>
+    </header>
+    <header class="message-details-header" v-if="message.subject">
       <h1 class="message-details-header-subject">{{message.subject}}</h1>
       <div class="message-details-header-info">
         <div class="message-details-header-info-sender">{{message.from}}</div>

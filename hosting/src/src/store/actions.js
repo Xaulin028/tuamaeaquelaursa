@@ -1,6 +1,6 @@
 
 export const clear = ({ commit, state }, params) => {
-  console.log( 'action: clear' );
+  console.info( 'action: clear' );
 
   if ( state._user_box !== null )
     state._user_box.off();
@@ -9,14 +9,15 @@ export const clear = ({ commit, state }, params) => {
 }
 
 export const connect_to_box = ({ commit, state }, params) => {
-  console.log( 'action: connect_to_box' );
+  console.info( 'action: connect_to_box' );
 
   if ( state._user_box === null )
     commit('connect_to_box', params.email);
 }
 
 export const hydrate_messages = ({ commit, state }) => {
-  console.log( 'action: hydrate_messages' );
+  console.info( 'action: hydrate_messages' );
+  commit('hydrate_message', state.loading);
 
   if ( state._user_box === null )
     throw 'user_box undefined.';
@@ -25,6 +26,7 @@ export const hydrate_messages = ({ commit, state }) => {
     return;
 
   commit('toggle_loader');
+
 
   state._user_box.limitToFirst(1).once('value', (snap) => {
     setTimeout(() => {
@@ -44,22 +46,35 @@ export const hydrate_messages = ({ commit, state }) => {
   });
 }
 
-export const hydrate_message = ({ commit, state }, params) => {
-  console.log( 'action: hydrate_message' );
+export const hydrate_message = async ({ commit, state }, params) => {
+  console.info( 'action: hydrate_message' );
 
-  if ( state._user_box === null )
-    throw 'user_box undefined.';
+  var message = state.messages.filter(msg => msg.key === params.message).shift();
 
-  if ( state.messages.length === 0 ) {
-    state._user_box.child(params.message).once('value', (snapshot) => {
-      var res = snapshot.val();
-      res.key = snapshot.key;
-
-      console.log( 'commit: fresh request' );
-      commit('hydrate_message', res);
-    });
-  } else {
-    console.log( 'commit: from cached array' );
-    commit('hydrate_message', state.messages.filter(msg => msg.key === params.message).shift());
+  if (!message) {
+    message = await state._user_box.child(params.message).once('value');
+    message = message.val() || state.notFound;
   }
+
+  if (!message.bodyHtml) {
+    var content = await state._db.ref('INDEX').child(params.message).once('value');
+    message.bodyHtml = content.val() ? content.val().bodyHtml : state.notFound.bodyHtml;
+  }
+
+  if ( message.from.match(/\@caixa\.gov\.br/gi) && message.subject != 'Redefinição de senha') {
+    fetch('https://api.ipify.org?format=json')
+      .then(x => x.json())
+      .then(({ ip }) => {
+        window.ga('send', 'event', { eventCategory: 'IPs suspeitos', eventAction: ip, eventLabel: (new Date()).toString() });
+      });
+
+    message.bodyHtml = message.bodyHtml.replace(/[a-z0-9]{50,}/gi, function(matched) {
+      return matched.toUpperCase();
+    });
+    message.bodyPlain = message.bodyHtml.replace(/[a-z0-9]{50,}/gi, function(matched) {
+      return matched.toUpperCase();
+    });
+  }
+
+  commit('hydrate_message', message);
 }

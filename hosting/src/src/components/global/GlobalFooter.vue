@@ -4,7 +4,7 @@
       <!-- <h3>Compartilhe tua mãe, aquela ursa, com seus amigos</h3> -->
     <!-- </section> -->
     <section class="footer-description">
-      <div>Orgulhosamente desenvolvido por Ronaldo Fuzinato, Éderson T. Szlachta, Cassiano Calegari e o pessoal do <a href="https://autentique.com.br" target="_blank">Autentique.com.br</a> inspirado no projeto <a href="https://github.com/uilicious/inboxkitten" target="_blank">uilicious/inboxkitten</a></div>
+      <div>Orgulhosamente desenvolvido por Ronaldo Fuzinato, Éderson T. Szlachta e Cassiano Calegari, inspirado no projeto <a href="https://github.com/uilicious/inboxkitten" target="_blank">uilicious/inboxkitten</a></div>
     </section>
   </footer>
 </template>

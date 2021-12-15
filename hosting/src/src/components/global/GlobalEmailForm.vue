@@ -48,7 +48,7 @@
           surname = names.surname[Math.floor(Math.random() * names.surname.length)];
         } while (name == surname)
 
-        return (name+' '+surname).normalize('NFD').replace(/ /g, '-').replace(/[\u0300-\u036f]/g, '');
+        return (name+' '+surname).normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/([ ]|[^a-z])/g, '-');
       },
     }
   }

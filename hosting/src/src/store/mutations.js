@@ -17,7 +17,7 @@ export const toggle_loader = (state) => {
 
 export const clear = (state) => {
   state.messages = [];
-  state.message = {};
+  state.message = state.loading;
   state._user_hash = null;
   state._user_box = null;
 

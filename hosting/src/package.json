@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "blueimp-md5": "^2.11.1",
+    "firebase": "^9.6.1",
     "normalize.css": "^8.0.1",
     "vue": "^2.6.10",
     "vue-ga": "^1.1.0",

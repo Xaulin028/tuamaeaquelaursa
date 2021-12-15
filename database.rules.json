@@ -1,6 +1,15 @@
 {
   "rules": {
-    ".read": true,
-    ".write": "auth != null"
+    "INBOX": {
+      "$user_hash": {
+        ".read": true,
+        ".write": false
+      }
+    },
+    "INDEX": {
+      "$uid" : {
+        ".read": true
+      }
+    }
   }
 }
