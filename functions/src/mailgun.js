@@ -17,8 +17,6 @@ module.exports = function (e, utils) {
             headers   : request.body['headers']    || null,
         };
 
-        const mail = utils.addNewMessage(fields);
-
-        response.send({"message":`Received and hosted at INBOX/${mail.user}/${mail.message}`});
+        response.send(utils.addNewMessage(fields));
     });
 };

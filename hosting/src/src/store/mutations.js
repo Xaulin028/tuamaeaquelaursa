@@ -1,5 +1,3 @@
-import md5 from 'blueimp-md5';
-
 
 export const current_page = (state, page) => {
   state.current_page = page;
@@ -16,9 +14,9 @@ export const toggle_loader = (state) => {
 
 
 export const clear = (state) => {
+  state._unsubscribe && state._unsubscribe();
   state.messages = [];
   state.message = state.loading;
-  state._user_hash = null;
   state._user_box = null;
 
   console.log('mutation: cleared');
@@ -26,14 +24,14 @@ export const clear = (state) => {
 
 
 export const connect_to_box = (state, email) => {
-  state._user_hash = md5( email + state._hosting.suffix );
-  state._user_box  = state._db.ref(`INBOX/${state._user_hash}`);
+  state._user_box = state._db.collection('MAILBOXES').doc(email + state._hosting.suffix).collection('INBOX');
 
   console.log('mutation: connect_to_box');
 }
 
 
 export const append_messages = (state, msg) => {
+
   state.messages.unshift(msg);
 
   console.log('mutation: append_messages');

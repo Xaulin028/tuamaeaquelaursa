@@ -6,7 +6,7 @@ import * as actions from './actions'
 import * as mutations from './mutations'
 
 import firebase from 'firebase/compat/app';
-import 'firebase/compat/database';
+import 'firebase/compat/firestore';
 
 
 import { hostingConfig, firebaseConfig } from '@/../config/app.js';
@@ -18,7 +18,7 @@ const state = {
   notFound: {
     from: 'Tua mãe, aquela ursa',
     subject: 'Correspondências não encontrada',
-    bodyHtml: '<center><pre>conteúdo não encontrado\n(~_~;)</pre><center>',
+    bodyHtml: '<p><center>nada para exibir<br>¯\\_(ツ)_/¯<center></p>',
     created_at: Date.now(),
   },
   loading: {
@@ -32,9 +32,9 @@ const state = {
   current_page: null,
   loader : false,
   _hosting : hostingConfig,
-  _user_hash: null,
   _user_box: null,
-  _db : firebase.initializeApp(firebaseConfig).database(),
+  _unsubscribe: null,
+  _db : firebase.initializeApp(firebaseConfig).firestore(),
 }
 // firebase.database.enableLogging(true);
 

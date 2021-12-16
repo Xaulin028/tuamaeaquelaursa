@@ -26,9 +26,7 @@ module.exports = function (e, utils) {
                 headers   : input['headers']    || null,
             };
 
-            const mail = utils.addNewMessage(fields);
-
-            response.send({"message":`Received and hosted at INBOX/${mail.user}/${mail.message}`});
+            response.send(utils.addNewMessage(fields));
         });
 
         busboy.end(request.rawBody);

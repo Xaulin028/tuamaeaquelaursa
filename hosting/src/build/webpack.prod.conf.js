@@ -52,16 +52,6 @@ const webpackConfig = merge(baseWebpackConfig, {
           global: 'lodash',
         },
         {
-          module: 'blueimp-md5',
-          entry: 'https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.11.1/js/md5.min.js',
-          global: 'md5',
-        },
-        {
-          module: 'moment',
-          entry: 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js',
-          global: 'moment',
-        },
-        {
           module: 'vue',
           entry: 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js',
           global: 'Vue',

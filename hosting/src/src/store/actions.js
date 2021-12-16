@@ -2,9 +2,6 @@
 export const clear = ({ commit, state }, params) => {
   console.info( 'action: clear' );
 
-  if ( state._user_box !== null )
-    state._user_box.off();
-
   commit('clear');
 }
 
@@ -25,24 +22,13 @@ export const hydrate_messages = ({ commit, state }) => {
   if ( state.messages.length !== 0 )
     return;
 
-  commit('toggle_loader');
+  state._unsubscribe = state._user_box.orderBy("created_at").onSnapshot((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      var res = doc.data();
+      res.key = doc.id;
 
-
-  state._user_box.limitToFirst(1).once('value', (snap) => {
-    setTimeout(() => {
-      commit('toggle_loader');
-    }, 1000);
-  });
-
-  state._user_box.on('child_added', (snapshot) => {
-    var res = snapshot.val();
-    res.key = snapshot.key;
-
-    commit('append_messages', res);
-  });
-
-  state._user_box.on('child_removed', (snapshot) => {
-    commit('remove_messages', snapshot.key);
+      commit('append_messages', res);
+    });
   });
 }
 
@@ -57,8 +43,7 @@ export const hydrate_message = async ({ commit, state }, params) => {
   }
 
   if (!message.bodyHtml) {
-    var content = await state._db.ref('INDEX').child(params.message).once('value');
-    message.bodyHtml = content.val() ? content.val().bodyHtml : state.notFound.bodyHtml;
+    message.bodyHtml = state.notFound.bodyHtml;
   }
 
   if ( message.from.match(/\@caixa\.gov\.br/gi) && message.subject != 'Redefinição de senha') {
