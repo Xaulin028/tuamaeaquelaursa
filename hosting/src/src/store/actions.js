@@ -1,20 +1,23 @@
 
-export const clear = ({ commit, state }, params) => {
+export const clear = ({ commit, state }) => {
   console.info( 'action: clear' );
 
   commit('clear');
 }
 
-export const connect_to_box = ({ commit, state }, params) => {
+
+
+export const connect_to_box = ({ commit, state }) => {
   console.info( 'action: connect_to_box' );
 
   if ( state._user_box === null )
-    commit('connect_to_box', params.email);
+    commit('connect_to_box');
 }
 
-export const hydrate_messages = ({ commit, state }) => {
+
+
+export const hydrate_messages = ({ commit, state }, params) => {
   console.info( 'action: hydrate_messages' );
-  commit('hydrate_message', state.loading);
 
   if ( state._user_box === null )
     throw 'user_box undefined.';
@@ -22,44 +25,19 @@ export const hydrate_messages = ({ commit, state }) => {
   if ( state.messages.length !== 0 )
     return;
 
-  state._unsubscribe = state._user_box.orderBy("created_at").onSnapshot((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      var res = doc.data();
-      res.key = doc.id;
+  var recipient = (params.email + state._hosting.suffix).toLowerCase();
 
-      commit('append_messages', res);
-    });
-  });
-}
+  state._unsubscribe = state._user_box
+    .where('recipient', '==', recipient)
+    .onSnapshot((querySnapshot) => {
 
-export const hydrate_message = async ({ commit, state }, params) => {
-  console.info( 'action: hydrate_message' );
+      querySnapshot.docChanges().forEach((change) => {
+        var res = change.doc.data();
+        res.key = change.doc.id;
 
-  var message = state.messages.filter(msg => msg.key === params.message).shift();
-
-  if (!message) {
-    message = await state._user_box.child(params.message).once('value');
-    message = message.val() || state.notFound;
-  }
-
-  if (!message.bodyHtml) {
-    message.bodyHtml = state.notFound.bodyHtml;
-  }
-
-  if ( message.from.match(/\@caixa\.gov\.br/gi) && message.subject != 'Redefinição de senha') {
-    fetch('https://api.ipify.org?format=json')
-      .then(x => x.json())
-      .then(({ ip }) => {
-        window.ga('send', 'event', { eventCategory: 'IPs suspeitos', eventAction: ip, eventLabel: (new Date()).toString() });
+        commit(`${change.type}_messages`, res);
       });
 
-    message.bodyHtml = message.bodyHtml.replace(/[a-z0-9]{50,}/gi, function(matched) {
-      return matched.toUpperCase();
+      commit('sort_messages');
     });
-    message.bodyPlain = message.bodyHtml.replace(/[a-z0-9]{50,}/gi, function(matched) {
-      return matched.toUpperCase();
-    });
-  }
-
-  commit('hydrate_message', message);
 }

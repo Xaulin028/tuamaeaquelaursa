@@ -19,11 +19,14 @@
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex';
+  import { mapState, mapGetters, mapActions } from 'vuex';
 
   export default {
     name: 'MessageList',
-    computed: mapState([ 'messages', 'loader' ]),
+    computed: {
+      ...mapState([ 'loader' ]),
+      ...mapGetters(['messages'])
+    },
     beforeMount() {
       this.hydrate_messages(this.$route.params);
     },

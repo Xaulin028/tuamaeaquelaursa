@@ -30,13 +30,13 @@ const state = {
   messages: [],
   message:  {},
   current_page: null,
+  current_params: null,
   loader : false,
   _hosting : hostingConfig,
   _user_box: null,
   _unsubscribe: null,
   _db : firebase.initializeApp(firebaseConfig).firestore(),
 }
-// firebase.database.enableLogging(true);
 
 state.message = state.loading;
 
@@ -52,9 +52,9 @@ router.beforeEach((to, from, next) => {
   if ( to.path === '/' )
     store.dispatch('clear');
   else
-    store.dispatch('connect_to_box', to.params);
+    store.dispatch('connect_to_box');
 
-  store.commit('current_page', to.name);
+  store.commit('current_page', to);
 
   next();
 });

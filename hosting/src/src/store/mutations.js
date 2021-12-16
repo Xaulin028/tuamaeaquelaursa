@@ -1,15 +1,16 @@
 
-export const current_page = (state, page) => {
-  state.current_page = page;
+export const current_page = (state, to) => {
+  state.current_page = to.name;
+  state.current_params = to.params;
 
-  console.log('mutation: current_page = ' + page);
+  console.info('mutation: current_page = ' + to.name);
 }
 
 
 export const toggle_loader = (state) => {
   state.loader = !state.loader;
 
-  console.log('mutation: toggle_loader = ' + state.loader);
+  console.info('mutation: toggle_loader = ' + state.loader);
 }
 
 
@@ -19,34 +20,53 @@ export const clear = (state) => {
   state.message = state.loading;
   state._user_box = null;
 
-  console.log('mutation: cleared');
+  console.info('mutation: cleared');
 }
 
 
-export const connect_to_box = (state, email) => {
-  state._user_box = state._db.collection('MAILBOXES').doc(email + state._hosting.suffix).collection('INBOX');
+export const connect_to_box = (state) => {
+  state._user_box = state._db.collection('INBOX');
 
-  console.log('mutation: connect_to_box');
+  console.info('mutation: connect_to_box');
 }
 
 
-export const append_messages = (state, msg) => {
-
+export const added_messages = (state, msg) => {
   state.messages.unshift(msg);
 
-  console.log('mutation: append_messages');
+  console.info('mutation: added_messages');
 }
 
 
-export const remove_messages = (state, msg_key) => {
-  state.messages.forEach((_v, _id, _ar) => { _v.key === msg_key && _ar.splice(_id, 1) });
+export const modified_messages = (state, msg) => {
+  state.messages.forEach((currentValue, index, arr) => {
+    if (currentValue.key === msg.key) {
+      Object.keys(currentValue).forEach(prop => {
+        if (msg[prop]) {
+          currentValue[prop] = msg[prop];
+        }
+      })
+    }
+  });
 
-  console.log('mutation: remove_messages ' + msg_key);
+  console.info('mutation: modified_messages');
 }
 
 
-export const hydrate_message = (state, msg) => {
-  state.message = msg;
+export const removed_messages = (state, msg) => {
+  state.messages.forEach((currentValue, index, arr) => { currentValue.key === msg.key && arr.splice(index, 1) });
 
-  console.log('mutation: hydrate_message');
+  console.info('mutation: removed_messages ' + msg.key);
+}
+
+
+export const sort_messages = (state) => {
+  console.log('sort');
+
+  state.messages.sort((a, b) => {
+    console.log('sorting');
+    return a.created_at < b.created_at;
+  })
+
+  console.info('mutation: sort_messages ');
 }
