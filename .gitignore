@@ -70,3 +70,4 @@ hosting/public/
 
 hosting/src/config/app.js
 functions/config/app.js
+.idea/
