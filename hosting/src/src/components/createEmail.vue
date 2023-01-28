@@ -20,16 +20,31 @@
         <h3>Compartilhe tua mãe, aquela ursa, com seus amigos</h3>
         <div class="sharethis-inline-share-buttons"></div>
       </div>
+
+      <div class="contact">
+        <h4>Fale conosco</h4>
+        <div>
+          <img src="@/assets/envelope.svg" class="contact--icon">
+          <a class="contact--email" :href="'mailto:' + email + _hosting.suffix">{{email}}{{_hosting.suffix}}</a>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+  import { mapState } from 'vuex';
   import GlobalEmailForm from '@/components/global/GlobalEmailForm.vue';
 
   export default {
     name: 'CreateEmail',
     components: { GlobalEmailForm },
+    data () {
+      return {
+        email: 'falecom',
+      };
+    },
+    computed: mapState(['_hosting' ]),
   }
 </script>
 
@@ -62,6 +77,16 @@
   }
   .share {
     padding-bottom: 1rem;
+  }
+  .contact--icon {
+    width: 1.1em;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -3px;
+  }
+  .contact--email {
+    text-decoration: none;
+    color: #000;
   }
 
   @media only screen and (max-width:800px) {

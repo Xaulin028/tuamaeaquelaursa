@@ -41,14 +41,21 @@
           hour: 'numeric',
           minute: 'numeric'
         };
+        let week = 86400000 * 6;
+        let msg_time = cur_date.getTime() - msg_date.getTime();
 
-        if ( msg_date.getDate() < cur_date.getDate() ) {
+        if ( msg_date.getDate() < cur_date.getDate() && msg_time < week ) {
           options.weekday = 'short';
+        }
+        else
+        if ( msg_date.getDate() == cur_date.getDate() && msg_time < week  ) {
+          options.second = 'numeric';
+        }
+        else {
+          options.weekday = 'short';
+          options.month = 'short';
           options.day = '2-digit';
         }
-
-        if ( msg_date.getDate() == cur_date.getDate() )
-          options.second = 'numeric';
 
         return msg_date.toLocaleString(navigator.language, options);
       }

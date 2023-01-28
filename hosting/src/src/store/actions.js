@@ -22,13 +22,12 @@ export const hydrate_messages = ({ commit, state }, params) => {
   if ( state._user_box === null )
     throw 'user_box undefined.';
 
-  if ( state.messages.length !== 0 )
+  if ( state.messages.length !== 0 ) {
+    console.error('hydrate_messages: messages.length !== 0');
     return;
-
-  var recipient = (params.email + state._hosting.suffix).toLowerCase();
+  }
 
   state._unsubscribe = state._user_box
-    .where('recipient', '==', recipient)
     .onSnapshot((querySnapshot) => {
 
       querySnapshot.docChanges().forEach((change) => {

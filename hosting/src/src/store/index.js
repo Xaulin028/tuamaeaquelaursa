@@ -49,12 +49,12 @@ const store = new Vuex.Store({
 
 
 router.beforeEach((to, from, next) => {
+  store.commit('current_page', to);
+
   if ( to.path === '/' )
     store.dispatch('clear');
   else
     store.dispatch('connect_to_box');
-
-  store.commit('current_page', to);
 
   next();
 });

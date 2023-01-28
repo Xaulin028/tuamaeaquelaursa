@@ -25,7 +25,9 @@ export const clear = (state) => {
 
 
 export const connect_to_box = (state) => {
-  state._user_box = state._db.collection('INBOX');
+  var recipient = (state.current_params.email + state._hosting.suffix).toLowerCase();
+
+  state._user_box = state._db.collection('MAILBOXES').doc(recipient).collection('INBOX');
 
   console.info('mutation: connect_to_box');
 }
