@@ -1,14 +1,27 @@
 <template>
   <div class="email-section">
-    <form class="email-section-form email-section-create-email" v-if="!$route.params.email" v-on:submit.prevent="openMessageList" :action="randomName">
-      <input class="email-section-field email-section-input-email" v-model="randomName">
-      <div   class="email-section-field email-section-input-suffix">{{_hosting.suffix}}</div>
-      <button class="email-section-field email-section-submit-button" type="submit">Criar email</button>
+    <form v-if="!$route.params.email" v-on:submit.prevent="openMessageList" :action="randomName">
+      <div class="email-section-form email-section-create-email">
+        <input class="email-section-field email-section-input-email" v-model="randomName">
+        <div class="email-section-field email-section-input-suffix">{{_hosting.suffix}}</div>
+        <div class="email-section-field email-section-copy-button">
+          <a href="javascript:void(0)" title="Copiar" v-on:click="copyEmail">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM352 32.491a15.88 15.88 0 0 1 7.431 4.195l51.882 51.883A15.885 15.885 0 0 1 415.508 96H352V32.491zM288 464c0 8.822-7.178 16-16 16H48c-8.822 0-16-7.178-16-16V144c0-8.822 7.178-16 16-16h80v240c0 26.51 21.49 48 48 48h112v48zm128-96c0 8.822-7.178 16-16 16H176c-8.822 0-16-7.178-16-16V48c0-8.822 7.178-16 16-16h144v72c0 13.2 10.8 24 24 24h72v240z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="email-section-form">
+        <button class="email-section-field email-section-submit-button" type="submit">Acessar email</button>
+      </div>
     </form>
 
-    <form class="email-section-form email-section-copy-email" v-if="$route.params.email" v-on:submit.prevent="copyEmail">
+    <form class="email-section-form email-section-copy-email" v-if="$route.params.email">
       <input class="email-section-field email-section-input-email" :value="$route.params.email + _hosting.suffix" readonly>
-      <button class="email-section-field email-section-submit-button" type="submit">Copiar</button>
+      <div class="email-section-field email-section-copy-button">
+        <a href="javascript:void(0)" title="Copiar" v-on:click="copyEmail">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM352 32.491a15.88 15.88 0 0 1 7.431 4.195l51.882 51.883A15.885 15.885 0 0 1 415.508 96H352V32.491zM288 464c0 8.822-7.178 16-16 16H48c-8.822 0-16-7.178-16-16V144c0-8.822 7.178-16 16-16h80v240c0 26.51 21.49 48 48 48h112v48zm128-96c0 8.822-7.178 16-16 16H176c-8.822 0-16-7.178-16-16V48c0-8.822 7.178-16 16-16h144v72c0 13.2 10.8 24 24 24h72v240z"/></svg>
+        </a>
+      </div>
     </form>
   </div>
 </template>
@@ -28,9 +41,15 @@
       this.randomName = this.generateRandomName().toString();
     },
     methods: {
-      copyEmail (action) {
-        action.srcElement.querySelector('.email-section-input-email').select();
+      copyEmail () {
+        const email = document.querySelector('.email-section-input-email');
+        const suffix = document.querySelector('.email-section-input-suffix');
+        const input = document.createElement('input');
+        input.value = email.value + (suffix ? suffix.textContent : '');
+        document.body.appendChild(input);
+        input.select();
         document.execCommand('copy');
+        input.remove();
       },
       openMessageList() {
         this.$router.push( this.randomName );
@@ -59,7 +78,6 @@
 
   .email-section {
     padding: 0 0 1rem;
-    background-color: $app-background;
 
     &-field {
       margin: 0;
@@ -75,23 +93,60 @@
     &-input-email {
       color: lighten($dark-text, 20%);
       text-overflow: ellipsis;
-      width: calc(100% - 1rem);
-      padding-left: 1rem;
+      font-size: 16px;
+      padding: 17px 0 17px 3px;
+      text-align: right;
+      border-right: 1px solid white;
+      border-radius: 0;
     }
     &-input-suffix {
-      color: lighten($dark-text, 30%);
-      background-color: $background;
+      font-size: 16px;
+      padding: 17px 3px 17px 0;
+      background: white;
+      color: $gray;
+      text-align: left;
+      border-left: 1px solid white;
+      border-right: 1px solid white;
+    }
+    &-copy-button {
+      text-decoration: none;
+      text-transform: none;
+      background-color: white;
+      border-left: 1px solid white;
+      align-items: center;
+      display: flex;
+      justify-items: center;
+      justify-content: flex-end;
+      padding-right: 10px;
+      svg {
+        fill: $gray;
+        width: 18px;
+      }
+      & a:hover svg, & a:focus svg {
+        fill: darken($gray, 10%);
+      }
+      & a:hover svg {
+        width: 19px;
+      }
+      & a:active svg {
+        fill: darken($gray, 30%);
+        width: 20px;
+      }
     }
     &-submit-button {
-
-      padding: 0.5rem 1rem;
+      padding: 13px;
+      margin: 10px 0 20px;
 
       text-decoration: none;
       text-transform: none;
+      cursor: pointer;
 
       border: 1px solid darken($cta-base, 10%);
       background: $cta-base;
       color: $cta-base-text;
+      font-size: 20px;
+      font-weight: 900;
+      border-radius: .5rem;
 
       &:hover, &:focus {
         border: 1px solid $cta-hover;
@@ -103,11 +158,10 @@
     &-form {
       border-radius: .5rem;
       overflow: hidden;
-      max-width: 600px;
+      max-width: 430px;
       margin-left: auto;
       margin-right: auto;
     }
-    &-create-email {}
 
     &-copy-email {
       &-input-box { display: flex; }
@@ -116,17 +170,20 @@
     }
   }
 
-  @media only screen and (min-width:700px) {
+  .email-section {
+    &-form { display: flex; }
+
+    &-field { flex: 1; }
+
+    &-input-email   { flex-grow: 3; }
+    &-input-suffix  { flex-grow: 3; }
+    &-copy-button { flex-grow: 0.2; }
+
+    &-input-email   { width: 100%; }
+  }
+
+  @media only screen and (max-width:1000px) {
     .email-section {
-      &-form { display: flex; }
-
-      &-field { flex: 1; }
-
-      &-input-email   { flex-grow: 2.25; }
-      &-input-suffix  { flex-grow: 2.00; }
-      &-submit-button { flex-grow: 0.75; }
-
-      &-input-email   { width: 100%; padding-left: 0; }
     }
   }
 </style>

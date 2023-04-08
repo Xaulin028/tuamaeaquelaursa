@@ -1,11 +1,11 @@
 <template>
-  <header class="global-header">
+  <header id="header" class="global-header">
     <router-link class="global-header-back-button" v-if="$route.params.email" :to="'/' + ($route.params.message ? $route.params.email : '')"><img src="@/assets/chevron-left.svg" style="display:block;"></router-link>
 
     <GlobalBear class="global-header-bear" />
 
     <h1 class="global-header-h1">Tua mãe, aquela ursa</h1>
-    <h3 class="global-header-h3">Crie um email descartável {{_hosting.suffix}}</h3>
+    <h3 class="global-header-h3">Crie um email descartável {{_hosting.suffix.replace(/\.com.*/, '')}}</h3>
 
     <GlobalEmailForm class="global-header-email-form" />
   </header>
@@ -35,7 +35,7 @@
 
     &-back-button {
       position: absolute;
-      margin-top: -1.25rem;
+      margin-top: -3.25rem;
       top: 50%;
       left: 1rem;
       width: 2rem;
@@ -61,9 +61,18 @@
         $duration max-height,
         $duration margin;
       max-height: 100px;
+      margin: 0;
     }
-    &-h1 {  }
-    &-h3 { color: $bright-text; }
+    &-h1 {
+      font-weight: 900;
+      font-size: 43px;
+      color: $black;
+    }
+    &-h3 {
+      color: $bright-text;
+      margin-bottom: 30px;
+      font-size: 19px;
+    }
 
     &-email-form {
       position: relative;
@@ -71,9 +80,9 @@
     }
   }
 
-  @media only screen and (max-width:800px) {
+  @media only screen and (max-width:1000px) {
     .global-header {
-      &-h1 { font-size: 1.50em; }
+      &-h1 { font-size: 2.00em; }
       &-h3 { font-size: 1.25em; }
     }
   }
@@ -84,7 +93,7 @@
       &-bear {
         transform: scale(.5);
         margin-top: -160px;
-        margin-bottom: -60px;
+        margin-bottom: -40px;
       }
 
       &-h1, &-h3 {

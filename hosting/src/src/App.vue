@@ -25,7 +25,7 @@
   @import '@/scss/_color.scss';
 
   .global-app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-family: Lato,sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
@@ -44,7 +44,6 @@
   .global-header,
   .global-footer {
     flex: 0 1 auto;
-
     text-align: center;
   }
 </style>
