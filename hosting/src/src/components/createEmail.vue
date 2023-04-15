@@ -4,23 +4,29 @@
       <div id="features" class="features">
         <h2 class="features-h2">Como funciona</h2>
         <div class="features-card">
-          <div class="features-img"><img src="@/assets/mailbox.svg"></div>
+          <div class="features-img">
+            <div class="features-img-container brown"><img src="@/assets/tmau1.png"></div>
+          </div>
           <div class="features-description">
-            <h3 class="features-card-h3">Tua mãe, aquela ursa recebe seus emails</h3>
+            <h3 class="features-card-h3 c-dark-brown">1. Tua mãe, aquela ursa recebe seus emails</h3>
             <p>Você poderá acessar todos os emails recebidos pelo seu email {{_hosting.suffix}}. Não é preciso criar o email antes, tua mãe, aquela ursa aceita tudo e filtra o que pertence ao seu endereço temporário</p>
           </div>
         </div>
         <div class="features-card">
           <div class="features-description">
-            <h3 class="features-card-h3">Acesse seu email {{_hosting.suffix.replace(/\.com.*/, '')}}</h3>
+            <h3 class="features-card-h3 c-blue">2. Acesse seu email {{_hosting.suffix.replace(/\.com.*/, '')}}</h3>
             <p>É só preencher o endereço no campo acima, ou você pode acessar diretamente pela URL https://{{_hosting.suffix.replace('@', '')}}/nome-do-seu-email</p>
           </div>
-          <div class="features-img"><img src="@/assets/browser.svg"></div>
+          <div class="features-img">
+            <div class="features-img-container blue"><img src="@/assets/tmau2.png"></div>
+          </div>
         </div>
         <div class="features-card">
-          <div class="features-img"><img src="@/assets/shredder.svg"></div>
+          <div class="features-img">
+            <div class="features-img-container pink"><img src="@/assets/tmau3.png"></div>
+          </div>
           <div class="features-description">
-            <h3 class="features-card-h3">Destruimos tudo para você</h3>
+            <h3 class="features-card-h3 c-pink">3. Destruimos tudo para você</h3>
             <p>Após algumas horas, todos os emails recebidos por Tua mãe, aquela ursa são destruídos, sem nenhum resquício. Assim ninguém ficará sabendo das coisas que Tua mãe, aquela ursa recebeu no passado</p>
           </div>
         </div>
@@ -140,6 +146,9 @@
   .d-none {
     display: none;
   }
+  .c-dark-brown { color: $dark-brown; }
+  .c-blue { color: #8AA7CC; }
+  .c-pink { color: #FF0069; }
 
   .features {
     margin: auto;
@@ -155,7 +164,7 @@
       font-size: 18px;
       padding-left: 1rem;
       padding-right: 1rem;
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
       &-h3 {
         font-size: 22px;
         margin-top: 1rem;
@@ -176,11 +185,22 @@
     &-img {
       flex: 0 0 50%;
       max-width: 50%;
-      min-height: 250px;
-      img {
+      &-container {
         width: 50%;
-        max-height: 250px;
+        border-radius: 20px;
+        &.brown { background-color: #C6B697; }
+        &.blue { background-color: #CBE2FF; }
+        &.pink { background-color: #FFBAD7; }
       }
+      img {
+        max-width: 172px;
+      }
+    }
+    &-card:nth-child(even) &-img-container { margin-left: auto; }
+    &-card:nth-child(odd) &-card-h3 { margin-left: 10rem; }
+    &-card:nth-child(odd) &-description p {
+      margin-right: 3rem;
+      margin-left: 10rem;
     }
   }
 
@@ -275,7 +295,7 @@
         }
       }
       &-description &-card-h3 {
-        margin: 0;
+        margin: 0 !important;
         font-size: 19px;
       }
       &-img, &-description {
@@ -283,12 +303,15 @@
       }
       &-img {
         margin-bottom: 1rem;
-        img { width: 100%; }
+        &-container {
+          width: 100%;
+          margin: 0;
+        }
       }
       &-description {
         margin-bottom: 3rem;
         p {
-          margin: 1rem 0;
+          margin: 1rem 0 !important;
           font-size: 1rem;
         }
       }
